@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "purpose": [
+        "debug-test"
+      ],
+      "env": {
+        "PYTEST_ADDOPTS": "--no-cov"
+      }
+    },
+    {
+      "name": "hello_world",
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "invokeTarget": {
+        "target": "template",
+        "logicalId": "HelloWorldFunction",
+        "templatePath": "${workspaceFolder}/src/hello/template.yaml"
+      },
+      "sam": {
+        "containerBuild": false,
+        "skipNewImageCheck": false,
+        "localArguments": [
+          "-n",
+          "${workspaceFolder}/debug/sam-local-env.json"
+        ],
+        "buildArguments": [
+          "--manifest",
+          "${workspaceFolder}/cpts-libs-layer/src/requirements.txt"
+        ]
+      }
+    }
+  ]
+}

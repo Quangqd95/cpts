@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  EnvName:
+    Type: String
+    AllowedValues:
+      - dev
+      - stg
+      - prod
+    Default: dev
+
+Globals:
+  Function:
+    Timeout: 3
+    Environment:
+      Variables:
+        ENV_NAME: !Ref EnvName
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !Sub "{{resolve:ssm:/cpts/deploy/${EnvName}/iamrole/lambda/01}}"
+      FunctionName: !Sub cpts-${EnvName}-lambda-HelloWorldFunction
+      CodeUri: src/hello/func/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Layers:
+        - !Sub "{{resolve:ssm:/cpts/deploy/${EnvName}/lambda/layer/01}}"
+
+  # CptsApi:
+  #   Type: AWS::Serverless::Api
+  #   Properties:
+  #     Name: !Sub cpts-${EnvName}-apigw
+  #     StageName: api
+  #     OpenApiVersion: "3.0.0"
+  #     DefinitionUri: !Sub s3://cpts-deploy-swagger/swagger-${EnvName}.yaml
+
+  CptsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub cpts-${EnvName}-apigw
+      StageName: api
+      OpenApiVersion: "3.0.0"
+      DefinitionUri: s3://cpts-deploy-swagger/swagger-dev.yaml
+
+  HelloWorldFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref HelloWorldFunction
+      Principal: apigateway.amazonaws.com

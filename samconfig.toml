@@ -1,0 +1,33 @@
+version = 0.1
+
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "cpts-api-dev"
+s3_bucket = "cpts-deploy-app"
+s3_prefix = "cpts-api-dev"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+image_repositories = []
+
+[stg]
+[stg.deploy]
+[stg.deploy.parameters]
+stack_name = "cpts-api-prod"
+s3_bucket = "cpts-deploy-app"
+s3_prefix = "cpts-api-prod"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+image_repositories = []
+parameter_overrides = "EnvName=stg"
+
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
+stack_name = "cpts-api-prod"
+s3_bucket = "cpts-deploy-app"
+s3_prefix = "cpts-api-prod"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+image_repositories = []
+parameter_overrides = "EnvName=prod"

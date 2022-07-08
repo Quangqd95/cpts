@@ -1,0 +1,56 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {},
+  "search.useIgnoreFiles": true,
+  "terminal.integrated.env.linux": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "./cpts-libs-layer/src"
+  },
+  "livePreview.portNumber": 3009,
+  "[yaml]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "python.languageServer": "Pylance",
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.analysis.autoImportCompletions": false,
+  "python.analysis.extraPaths": [
+    "./cpts-libs-layer/src"
+  ],
+  "python.autoComplete.extraPaths": [
+    "./cpts-libs-layer/src"
+  ],
+  "autoDocstring.docstringFormat": "numpy",
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--max-line-length",
+    "80",
+    "--aggressive",
+    "--aggressive"
+  ],
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=80"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
+  "python.testing.pytestArgs": [
+    "tests",
+    "--cov=src",
+    "--cov-report",
+    "html"
+  ]
+}
